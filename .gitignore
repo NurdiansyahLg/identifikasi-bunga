@@ -1,0 +1,6 @@
+Dataset/
+__pycache__/
+*.h5
+*.json
+.DS_Store
+.env

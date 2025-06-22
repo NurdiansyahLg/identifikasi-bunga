@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Identifikasi Jenis Bunga</title>
+    <style>
+        /* FULL PAGE BACKGROUND */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url("/static/bunga.jpg") no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* GLASS EFFECT CONTAINER */
+        .container {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            color: #fff;
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.2);
+        }
+
+        input[type="file"] {
+            color: white;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border: 1px solid white;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        button:hover {
+            background-color: rgba(255, 255, 255, 0.5);
+        }
+
+        img {
+            margin-top: 20px;
+            max-width: 100%;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .penjelasan {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Identifikasi Jenis Bunga</h2>
+
+        <!-- Penjelasan Sistem CNN -->
+        <div class="penjelasan">
+            Sistem ini menggunakan metode <strong>Convolutional Neural Network (CNN)</strong> untuk mengidentifikasi jenis bunga berdasarkan gambar yang diunggah.
+            Model CNN dibangun dari awal (custom CNN) dengan dua lapisan konvolusi, dua lapisan max pooling, dan dua lapisan fully connected.
+            Setelah gambar diproses, sistem akan menampilkan hasil identifikasi serta tingkat kepercayaannya.
+        </div>
+
+        <!-- Form Upload -->
+        <form action="/predict" method="POST" enctype="multipart/form-data">
+            <input type="file" name="file" id="fileInput" accept="image/*" required><br>
+            <img id="preview" src="#" alt="Preview Gambar">
+            <br><br>
+            <button type="submit">Identifikasi</button>
+        </form>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const preview = document.getElementById('preview');
+
+        fileInput.onchange = evt => {
+            const [file] = fileInput.files;
+            if (file) {
+                preview.src = URL.createObjectURL(file);
+                preview.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
